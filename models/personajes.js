@@ -1,4 +1,4 @@
-const { Inventario } = require('./objeto');
+const { Inventario } = require('./inventario');
 
 
 // Clase Personaje
