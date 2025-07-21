@@ -1,0 +1,13 @@
+{
+  "personajes": [
+    {
+      "nombre": "Thor",
+      "clase": "Guerrero",
+      "salud": 120,
+      "ataque": 15,
+      "defensa": 10,
+      "nivel": 1,
+      "experiencia": 0
+    }
+  ]
+}
