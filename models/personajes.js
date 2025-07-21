@@ -1,3 +1,6 @@
+const { Inventario } = require('./objeto');
+
+
 // Clase Personaje
 class Personaje {
     constructor(nombre,nivel=1) {
@@ -7,6 +10,7 @@ class Personaje {
         this.vida = this.vidaMax;// Vida actual, comienza llena
         this.ataque = 10 + nivel * 2;// Ataque base, aumenta con el nivel
         this.habilidades = [];  // Lista de habilidades del personaje
+        this.inventario = new Inventario();
     }
 
     // Metodo para saber si el personaje aun esta vivo
@@ -26,7 +30,7 @@ class Personaje {
     usarHabilidad(indice,objetivo){
         const habilidad = this.habilidades[indice];
         if(!habilidad) return "No hay habilidades disponibles";
-        return habilidad.efecto(this.objetivo);
+        return habilidad.efecto(this,objetivo);
     }
 
     // Metodo para subir de nivel el personaje
@@ -36,19 +40,23 @@ class Personaje {
         this.ataque += 2; // Aumenta el ataque
         this.vida = this.vidaMax; // Restaura la vida al máximo
     }
+
+    usarObjeto(nombreObjeto){
+        this.inventario.usar(nombreObjeto, this)
+    }
 }
 
 // Subclase: Guerrero
 class Guerrero extends Personaje {
     constructor(nombre, nivel=1){
-        super(this.nombre,nivel);
+        super(nombre,nivel);
         this.ataque += 5; // Guerrero tiene más ataque base
         // Agrega una habilidad especial de Guerrero
         this.habilidades.push({
             nombre: "Golpe Poderoso",
             efecto: (usuario, enemigo) => {
                 const danio = usuario.ataque * 1.5;
-                anemigo.recibirDanio(danio);
+                enemigo.recibirDanio(danio);
                 return `${usuario.nombre} usa Golpe poderoso y causa ${danio.toFixed(1)} de daño a ${enemigo.nombre}`;
             }
         });
@@ -58,7 +66,7 @@ class Guerrero extends Personaje {
 // Subclase: Mago
 class Mago extends Personaje{
     constructor (nombre,nivel = 1){
-        super(this.nombre,nivel);
+        super(nombre,nivel);
         this.vidaMax -=20;
         this.vida = this.vidaMax;
         this.ataque += 3;
@@ -76,8 +84,8 @@ class Mago extends Personaje{
 
 // subclase Arquero
 class Arquero extends Personaje{
-    constructor(nomre,nivel = 1){
-        super(this.nombre,nivel);
+    constructor(nombre,nivel = 1){
+        super(nombre,nivel);
         this.ataque += 2;
         // Agrega una habilidad especial de Arquero
         this.habilidades.push({
@@ -93,7 +101,7 @@ class Arquero extends Personaje{
 
 // Exporta las clases
 
-module.export = {
+module.exports = {
     Personaje,
     Guerrero,
     Mago,

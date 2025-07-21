@@ -4,8 +4,8 @@ const chalk = require('chalk');
 // Define las clase para manejar una batalla entre dos personajes
 class GestorBatalla {
     // constructor que recibe los personajes  y define el tuno principal
-    constructor(perosnaje1, personaje2) {
-        this.p1 = perosnaje1;
+    constructor(personaje1, personaje2) {
+        this.p1 = personaje1;
         this.p2 = personaje2;
         this.turno = 0; // contador de turnos (empieza en 0)
     }
@@ -21,8 +21,8 @@ class GestorBatalla {
             console.log(chalk.blue(`Turno de ${atacante.nombre}`));
 
             // Si es cada 3 turnos  y el atacante tiene habilidades disponibles
-            const usarHabilidad = this.turno % 3 === o && atacante.habilidades.legth > 0;
-            if (usuarHabilidad) {
+            const usarHabilidad = this.turno % 3 === 0 && atacante.habilidades.length> 0;
+            if (usarHabilidad) {
                 // Usa la primera habilidad del atacante sobre el defensor 
                 const resultado = atacante.usarHabilidad(0, defensor);
                 // Imprime el resultado de la habilidad con solor magenta
@@ -56,4 +56,4 @@ class GestorBatalla {
 }
 
 // exportar la clase de GestorBatlla 
-MediaSourceHandle.exports = GestorBatalla;
+module.exports = GestorBatalla;
