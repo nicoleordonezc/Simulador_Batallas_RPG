@@ -1,8 +1,9 @@
 const inquirer = require('inquirer');
 const Personaje = require('./src/models/personajes');
+const Enemigo = require("./src/models/enemigos")
 const { Objeto, Inventario } = require('./src/models/inventario');
 const { guardar, cargar } = require('./src/utils/persistencia');
-const GestorBatalla = require('./src/services/GestorBatalla');
+const iniciarBatalla = require('./src/services/GestorBatalla');
 
 let personajes = cargar(); // Carga personajes guardados
 
@@ -82,12 +83,8 @@ async function menu() {
     }
 
     else if (opcion === 'Iniciar batalla') {
-      if (personajes.length < 2) {
-        console.log("⚠️ Necesitas al menos dos personajes para iniciar una batalla.");
-      } else {
         await iniciarBatalla(personajes);
         guardar(personajes); // Guardar después de la batalla
-      }
     }
 
     else if (opcion === 'Salir') {

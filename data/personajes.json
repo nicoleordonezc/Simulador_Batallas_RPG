@@ -64,5 +64,26 @@
         }
       ]
     }
+  },
+  {
+    "nombre": "jytr",
+    "salud": null,
+    "ataque": 23,
+    "nivel": 1,
+    "vidaMax": 110,
+    "vida": 110,
+    "habilidades": [
+      {
+        "nombre": "kad"
+      }
+    ],
+    "inventario": {
+      "objetos": [
+        {
+          "nombre": "oans",
+          "tipo": "aksmd"
+        }
+      ]
+    }
   }
 ]

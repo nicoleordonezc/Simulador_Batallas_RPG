@@ -3,8 +3,11 @@ const { Inventario } = require('./inventario');
 
 // Clase Personaje
 class Personaje {
-    constructor(nombre,nivel=1) {
-        this.nombre = nombre
+    constructor(nombre, salud, ataque, defensa, nivel=1) {
+        this.nombre = nombre;
+        this.salud = salud;
+        this.ataque = ataque;
+        this.defensa = defensa;
         this.nivel = nivel;
         this.vidaMax = 100 + nivel * 10;// Vida máxima que escala con el nivel
         this.vida = this.vidaMax;// Vida actual, comienza llena

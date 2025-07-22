@@ -1,7 +1,10 @@
 const Personaje = require("./personajes")
 
 class Enemigo extends Personaje{
-    static nombre = ["Goblin", "Orco", "Trol", "Esqueleto", "Lobo", "Demonio"];
+    static nombres = ["Goblin", "Orco", "Trol", "Esqueleto", "Lobo", "Demonio"];
+    constructor(nombre, salud, ataque, defensa) {
+        super( nombre, salud, ataque, defensa); // <- Pasa los valores al constructor de Personaje
+    }
     static crearAleatorio() {
         const nombre = this.nombres[Math.floor(Math.random() * this.nombres.length)];
         const salud = Math.floor(Math.random() * 30) + 70;
@@ -11,3 +14,5 @@ class Enemigo extends Personaje{
         return new Enemigo(nombre, salud, ataque, defensa);
       }
 }
+
+module.exports = Enemigo
