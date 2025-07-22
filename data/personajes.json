@@ -1,13 +1,68 @@
-{
-  "personajes": [
-    {
-      "nombre": "Thor",
-      "clase": "Guerrero",
-      "salud": 120,
-      "ataque": 15,
-      "defensa": 10,
-      "nivel": 1,
-      "experiencia": 0
+[
+  {
+    "nombre": "nicole",
+    "nivel": 1,
+    "vidaMax": 110,
+    "vida": 110,
+    "ataque": 17,
+    "habilidades": [
+      {
+        "nombre": "Golpe Poderoso"
+      }
+    ],
+    "inventario": {
+      "objetos": []
     }
-  ]
-}
+  },
+  {
+    "nombre": "kol",
+    "nivel": 1,
+    "vidaMax": 110,
+    "vida": 110,
+    "ataque": 12,
+    "habilidades": [],
+    "inventario": {
+      "objetos": []
+    }
+  },
+  {
+    "nombre": "hgf",
+    "nivel": 3,
+    "vidaMax": 130,
+    "vida": 130,
+    "ataque": 5,
+    "habilidades": [
+      {
+        "nombre": "fdz"
+      }
+    ],
+    "inventario": {
+      "objetos": [
+        {
+          "nombre": "gfds",
+          "tipo": "rewq"
+        }
+      ]
+    }
+  },
+  {
+    "nombre": "Mago",
+    "nivel": 3,
+    "vidaMax": 130,
+    "vida": 130,
+    "ataque": 6,
+    "habilidades": [
+      {
+        "nombre": "rapidez"
+      }
+    ],
+    "inventario": {
+      "objetos": [
+        {
+          "nombre": "escudo",
+          "tipo": "proteccion"
+        }
+      ]
+    }
+  }
+]

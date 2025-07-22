@@ -6,10 +6,15 @@ function guardar(personajes) {
 }
 
 function cargar() {
-  if (fs.existsSync(ruta)) {
-    return JSON.parse(fs.readFileSync(ruta));
+  if (!fs.existsSync(ruta)) return []; // ✅ Si el archivo no existe, devuelve un arreglo vacío
+  const data = fs.readFileSync(ruta, 'utf-8');
+  try {
+    const json = JSON.parse(data);
+    return Array.isArray(json) ? json : []; // ✅ Asegura que se devuelva un arreglo
+  } catch (error) {
+    console.error('Error al leer personajes:', error.message);
+    return [];
   }
-  return [];
 }
 
 module.exports = { guardar, cargar };
