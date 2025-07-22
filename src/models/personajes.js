@@ -101,9 +101,4 @@ class Arquero extends Personaje{
 
 // Exporta las clases
 
-module.exports = {
-    Personaje,
-    Guerrero,
-    Mago,
-    Arquero
-};
+module.exports = Personaje;

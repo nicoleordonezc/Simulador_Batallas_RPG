@@ -1,95 +1,50 @@
-import inquirer from 'inquirer';
-import chalk from 'chalk';
+const inquirer = require('inquirer');
+const { Guerrero } = require('./src/models/Guerrero');
+const GestorBatalla = require('./src/services/GestorBatalla');
+const { guardar, cargar } = require('./src/utils/persistencia');
 
-import { initDB } from './src/services/db.js';
-import GestorPersonajes from './src/services/GestorPersonajes.js';
+let personajes = cargar();
 
-import Guerrero from './models/Guerrero.js';
-import Mago from './models/Mago.js';
-import Arquero from './models/Arquero.js';
-
-(async () => {
-  await initDB();
-  await mostrarMenu();
-})();
-
-async function mostrarMenu() {
-  const { opcion } = await inquirer.prompt([
-    {
-      type: 'list',
-      name: 'opcion',
-      message: '¿Qué deseas hacer?',
-      choices: [
-        'Crear personaje',
-        'Ver personajes',
-        'Iniciar batalla (no implementado)',
-        'Salir',
-      ],
-    },
-  ]);
-
-  switch (opcion) {
-    case 'Crear personaje':
-      await crearPersonaje();
-      break;
-    case 'Ver personajes':
-      await verPersonajes();
-      break;
-    case 'Iniciar batalla (no implementado)':
-      console.log(chalk.yellow('\nFuncionalidad en construcción...\n'));
-      break;
-    case 'Salir':
-      console.log(chalk.green('\n¡Hasta luego!\n'));
-      return;
-  }
-
-  await mostrarMenu();
-}
-
-async function crearPersonaje() {
-  const { nombre, clase } = await inquirer.prompt([
-    {
-      type: 'input',
-      name: 'nombre',
-      message: 'Nombre del personaje:',
-    },
-    {
-      type: 'list',
-      name: 'clase',
-      message: 'Selecciona una clase:',
-      choices: ['Guerrero', 'Mago', 'Arquero'],
-    },
-  ]);
-
-  let personaje;
-
-  switch (clase) {
-    case 'Guerrero':
-      personaje = new Guerrero(nombre);
-      break;
-    case 'Mago':
-      personaje = new Mago(nombre);
-      break;
-    case 'Arquero':
-      personaje = new Arquero(nombre);
-      break;
-  }
-
-  await GestorPersonajes.agregar(personaje);
-  console.log(chalk.green('\n¡Personaje creado exitosamente!\n'));
-}
-
-async function verPersonajes() {
-  const personajes = await GestorPersonajes.obtenerTodos();
-
-  if (personajes.length === 0) {
-    console.log(chalk.red('\nNo hay personajes creados aún.\n'));
-    return;
-  }
-
-  console.log(chalk.cyan('\nLista de personajes:\n'));
-  personajes.forEach((p, i) => {
-    console.log(`#${i + 1}:`, `${p.nombre} | Clase: ${p.clase} | Nivel: ${p.nivel} | Vida: ${p.vida}`);
+async function menu() {
+  const opciones = await inquirer.prompt({
+    type: 'list',
+    name: 'accion',
+    message: '¿Qué deseas hacer?',
+    choices: ['Crear personaje', 'Ver personajes', 'Iniciar batalla', 'Salir']
   });
-  console.log('');
+
+  switch (opciones.accion) {
+    case 'Crear personaje':
+      const { nombre } = await prompt({ name: 'nombre', message: 'Nombre del guerrero:' });
+      const nuevo = new Guerrero(nombre);
+      personajes.push(nuevo);
+      guardar(personajes);
+      break;
+
+    case 'Ver personajes':
+      if (personajes.length === 0) {
+        console.log('No hay personajes creados aún.');
+      } else {
+        personajes.forEach(p => console.log(`${p.nombre} - Nivel: ${p.nivel} - Salud: ${p.salud}`));
+      }
+      break;
+
+    case 'Iniciar batalla':
+      if (personajes.length === 0) {
+        console.log('Primero crea un personaje para iniciar la batalla.');
+        break;
+      }
+      const enemigo = new Guerrero('Orco');
+      const batalla = new GestorBatalla(personajes[0], enemigo);
+      batalla.iniciarBatalla();
+      break;
+
+    case 'Salir':
+      console.log('Hasta la próxima aventura...');
+      process.exit();
+  }
+
+  menu();
 }
+
+menu();

@@ -12,7 +12,6 @@
   },
   "license": "ISC",
   "author": "",
-  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,7 +19,7 @@
   },
   "dependencies": {
     "chalk": "^5.4.1",
-    "inquirer": "^12.8.1",
+    "inquirer": "^8.2.4",
     "lowdb": "^7.0.1",
     "uuid": "^11.1.0"
   }

@@ -1,5 +1,5 @@
 // src/services/GestorPersonajes.js
-import { db } from './db.js'
+import { db } from '../utils/db.js'
 
 class GestorPersonajes {
   static async agregar(personaje) {
