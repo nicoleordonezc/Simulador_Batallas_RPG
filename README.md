@@ -63,6 +63,6 @@ Este es un proyecto de consola desarrollado en Node.js que simula una batalla en
 
 ## 📽️ Video de Presentación
 
-\[]
+🔗[Ver video presentación](https://drive.google.com/drive/folders/1yDqNEpIaC258ntdtb30e8e8IV9RiXJqY?usp=sharing)
 
 ---
